@@ -9,15 +9,16 @@ function RegisterReq() {
   };
 
   return (
-    <div className="wallpaper2">
+    <div className="wallpaper1">
 
       <div className="login-wrapper">
         <h1>Request status</h1>
         <p>Registration Completed</p>
-      </div>
+      
       <Button variant="primary" onClick={() => handleLogin()}>
         Back
       </Button>
+</div>
     </div>
   );
 }
