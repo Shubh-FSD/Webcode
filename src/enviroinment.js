@@ -1,5 +1,5 @@
 const env = {
-    apiurl: "https://webcode-crm-heroku.herokuapp.com"
+    apiurl: "https://webcode2-render.onrender.com"
 }
 
 export default env;
