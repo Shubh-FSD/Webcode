@@ -1,13 +1,32 @@
-.login-wrapper{
-    text-align: center;
-    margin-top:6rem
+
+.Cont-Center{
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 12rem;
+   justify-content: center; 
+   text-align: center;
+   
+}
+
+
+
+.Cont-Center h1{
+ overflow-y: hidden;
+}
+
+
+/* .login-wrapper{
+ 
+    margin-top:6rem;
+    
   }
   
   .login-main-wrapper{
     width: 450px;
     margin-left: 35%;
     margin-right: 35%;
-  }
+  } */
 
   .wallpaper{
     background-image: url(../assets/imgs/login\ image.jpg);
