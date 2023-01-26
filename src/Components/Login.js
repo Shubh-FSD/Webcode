@@ -73,21 +73,18 @@ function Login() {
   }
   return <>
   <Navbar1 />
-  <div className ="wallpaper">
-    <div className="login-wrapper">
+  <div className ="container-fluid d-flex justify-content-center Cont-Center">
       <h1>Welcome to App</h1>
       <p>Login to Continue</p>
-    </div>
-    <div className='login-main-wrapper'>
-      <Form>
+      <Form >
         <Form.Group className="mb-3">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" onChange={(e)=>setEmail(e.target.value)}/>
+          <Form.Control   type="email" placeholder="Enter email" onChange={(e)=>setEmail(e.target.value)}/>
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
+          <Form.Control  type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
         </Form.Group>
 
         <Button className ="mx-2" variant="primary" onClick={()=>handleLogin()}>
@@ -108,8 +105,7 @@ function Login() {
            </p>
       {toggle?<Spinner animation="border" variant="primary" />:<></>}
       {message?<div style={{"color":"red","textAlign":"center"}}>{message}</div>:<></>}
-    </div>  
-    </div>
+      </div>
   </>
 }
 
