@@ -22,6 +22,9 @@
   margin-right:0.5rem;
   overflow-y: hidden;
 }
+
+h1{
+overflow-y:hidden}
 .Entry-Caption p{
   margin-left: 0.5rem;
   margin-right:0.5rem;
