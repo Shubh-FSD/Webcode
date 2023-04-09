@@ -20,57 +20,47 @@ function Login() {
   let navigate = useNavigate()
   const context1 =useContext(EmployeeContext)
 
- const handleAdminLogin = async ()=>{ 
-    let res2 = await axios.post(`${env.apiurl}/users/signinAdmin`,{
-      email,
-      password
-    })
+ let handleLogin = async ()=>{
+  setToggle(true)
+  let res = await axios.post(`${env.apiurl}/users/signin`,{
+    email,
+    password
+  })
+  
+  if(res.data.statusCode===200)
+  {
+      setToggle(false)
+     localStorage.setItem('token',res.data.token)
+     console.log(res.data.token)
+     context1.leadLength()
+     context1.requestLength()
+     await handleVerify()
+  }
+  else
+  {
+    setToggle(false)
+    setMessage(res.data.message)
+    setTimeout(()=>{
+      setMessage("")
+    },3000)
 
-    if((res2.data.statusCode===200 ) )
-      { localStorage.setItem('token',res2.data.token)
-          await handleAdminVerify()
-      }
-  else{
-    setMessage(res2.data.message)
-  }}
-
-  const handleAdminVerify = async ()=>{ 
+  }
+}
+  const handleVerify = async ()=>{ 
   let res3 = await axios.get(`${env.apiurl}/users/adminRoleAuth`)
-     console.log(res3)
+     console.log(res3,"1")
      if (res3.data.data ===  "Admin")
       {
          navigate('/Dashboard1')
+      }
+       if (res3.data.data ===  "Employee" || "NEmployee")
+      {
+         navigate('/Dashboard')
       }
       else{alert ("Only Admin has Access")}
   }
   
   let handleForgotpass = async ()=>{ navigate('/Forgot')}
-
-  let handleLogin = async ()=>{
-    setToggle(true)
-    let res = await axios.post(`${env.apiurl}/users/signin`,{
-      email,
-      password
-    })
-    
-    if(res.data.statusCode===200)
-    {
-        setToggle(false)
-       localStorage.setItem('token',res.data.token)
-       context1.leadLength()
-       context1.requestLength()
-       navigate('/Dashboard')
-    }
-    else
-    {
-      setToggle(false)
-      setMessage(res.data.message)
-      setTimeout(()=>{
-        setMessage("")
-      },3000)
-
-    }
-  }
   return <>
   <Navbar1 />
   <div className ="container-fluid d-flex justify-content-center Cont-Center">
@@ -90,9 +80,7 @@ function Login() {
         <Button className ="mx-2" variant="primary" onClick={()=>handleLogin()}>
           Login
        </Button>
-         <Button className ="mx-2"variant="primary" onClick={()=> handleAdminLogin()}>
-          Admin Login
-        </Button>
+         
         <Button className ="mx-2" variant="primary" onClick={()=>handleForgotpass()}>
           Forgot Password
         </Button>
@@ -102,6 +90,9 @@ function Login() {
            2)Admin login aplicable for whos role is admin and after login admin can change role.
            3)Normal login as a Admin & Employee can open leads and service request and can perform CRUD operation in leads and service request.
            4)Normal login as a NEmployee can just see no. of leads and request.(not able to perform CRUD)
+           5) Demo login credentials 
+              Username: 1999shubhamjoshi@gmail.com
+              pass : 123
            </p>
       {toggle?<Spinner animation="border" variant="primary" />:<></>}
       {message?<div style={{"color":"red","textAlign":"center"}}>{message}</div>:<></>}
