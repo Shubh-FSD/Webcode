@@ -20,7 +20,21 @@ function Login() {
   let navigate = useNavigate()
   const context1 =useContext(EmployeeContext)
 
- let handleLogin = async ()=>{
+//  const handleAdminLogin = async ()=>{ 
+//     let res2 = await axios.post(`${env.apiurl}/users/signinAdmin`,{
+//       email,
+//       password
+//     })
+
+//     if((res2.data.statusCode===200 ) )
+//       { localStorage.setItem('token',res2.data.token)
+//           await handleVerify()
+//       }
+//   else{
+//     setMessage(res2.data.message)
+//   }}
+
+let handleLogin = async ()=>{
   setToggle(true)
   let res = await axios.post(`${env.apiurl}/users/signin`,{
     email,
@@ -61,6 +75,44 @@ function Login() {
   }
   
   let handleForgotpass = async ()=>{ navigate('/Forgot')}
+
+  
+
+// let handleLogin = async () => {
+//   setToggle(true);
+//   let res = await axios.post(`${env.apiurl}/users/signin`, {
+//     email,
+//     password,
+//   });
+
+//   if (res.data.statusCode === 200) {
+//     setToggle(false)
+//            localStorage.setItem('token',res.data.token)
+//             context1.leadLength()
+//            context1.requestLength()
+//     handleRole(email);
+//   } else {
+//     setToggle(false);
+//     setMessage(res.data.message);
+//     setTimeout(() => {
+//       setMessage("");
+//     }, 3000);
+//   }
+// };
+
+// const handleRole = async (email) => {
+//   const res = await axios.get(`${env.apiurl}/users/getRole/${email}`);
+
+//   if (res.data.statusCode === 200) {
+//     if (res.data.dataRole === "Admin") {
+//       navigate("/Dashboard1");
+//     }
+//     if (res.data.dataRole === "Employee" || res.data.dataRole ==="NEmployee") {
+//       navigate("/Dashboard");
+//     }
+   
+//   }
+// };
   return <>
   <Navbar1 />
   <div className ="container-fluid d-flex justify-content-center Cont-Center">
@@ -80,7 +132,9 @@ function Login() {
         <Button className ="mx-2" variant="primary" onClick={()=>handleLogin()}>
           Login
        </Button>
-         
+         {/* <Button className ="mx-2"variant="primary" onClick={()=> handleAdminLogin()}>
+          Admin Login
+        </Button> */}
         <Button className ="mx-2" variant="primary" onClick={()=>handleForgotpass()}>
           Forgot Password
         </Button>
@@ -90,9 +144,6 @@ function Login() {
            2)Admin login aplicable for whos role is admin and after login admin can change role.
            3)Normal login as a Admin & Employee can open leads and service request and can perform CRUD operation in leads and service request.
            4)Normal login as a NEmployee can just see no. of leads and request.(not able to perform CRUD)
-           5) Demo login credentials 
-              Username: 1999shubhamjoshi@gmail.com
-              pass : 123
            </p>
       {toggle?<Spinner animation="border" variant="primary" />:<></>}
       {message?<div style={{"color":"red","textAlign":"center"}}>{message}</div>:<></>}
